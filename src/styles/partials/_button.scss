@@ -1,0 +1,64 @@
+.button-default{
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.3125rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  background-color: transparent;
+}
+.button-type-green,
+.button-type-warning,
+.button-type-danger {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.3125rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-type-green {
+  background-color: #4caf50;
+  color: white;
+}
+
+.button-type-green:hover {
+  background-color: #45a049;
+}
+
+.button-type-warning {
+  background-color: #ff9800;
+  color: white;
+}
+
+.button-type-warning:hover {
+  background-color: #fb8c00;
+}
+
+.button-type-danger {
+  background-color: #cc242c;
+  color: white;
+}
+
+.button-type-danger:hover {
+  background-color: #be1b23;
+}
+
+.button-type-green:disabled,
+.button-type-warning:disabled,
+.button-type-danger:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+
+.button-type-blue {
+  background-color: #006aff;
+  margin-bottom: 0.5rem;
+}
+
+.button-type-blue:hover {
+  background-color: #002aff;
+  margin-bottom: 0.5rem;
+}

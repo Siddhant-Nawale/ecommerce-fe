@@ -1,0 +1,119 @@
+.product-list-component-wrapper {
+  .title {
+    font-size: 1.9rem;
+    padding: 0;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  &.vertical {
+    .product-cards-wrapper {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      padding: 0.5rem 2rem;
+    }
+
+    .load-more-container {
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .load-more-button {
+      position: relative;
+      right: unset;
+      border-radius: 4px;
+      justify-content: center;
+      height: fit-content;
+      width: fit-content;
+    }
+  }
+}
+
+.product-list-container {
+  width: 80rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+
+  &.vertical-layout {
+    flex-direction: column;
+    overflow: visible;
+  }
+}
+
+.scroll-arrow {
+  font-size: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  height: 2.5rem;
+  width: 2.5rem;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  border: black;
+  border-radius: 100%;
+  color: rgb(0, 0, 0);
+  z-index: 2;
+
+  &.left {
+    position: absolute;
+    left: 0.5rem;
+  }
+
+  &.right {
+    position: absolute;
+    right: 0.5rem;
+  }
+}
+
+.product-cards-wrapper {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.5rem 2rem;
+
+  &.vertical-layout {
+    flex-direction: column;
+  }
+}
+
+.load-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+
+  .load-more-button {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.load-more-button {
+  background-color: #007bff;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  right: 0;
+  border: none;
+  border-radius: 100%;
+  width: 3.5rem;
+  height: 3.5rem;
+  cursor: pointer;
+
+  &:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+  }
+}

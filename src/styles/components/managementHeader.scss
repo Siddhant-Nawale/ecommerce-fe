@@ -1,0 +1,27 @@
+.management-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  background-color: #0059e0;
+  height: 4.375rem;
+}
+
+.logout-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+}
+
+.logout-button:hover {
+  color: #dddddd;
+}
+
+.logout-icon {
+  margin: 1rem;
+}
