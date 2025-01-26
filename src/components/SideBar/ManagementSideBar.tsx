@@ -1,41 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import * as Icons from "react-icons/fa";
 import authorizationservice from "../../services/authorizationservice";
 import { managementSideBarConfig } from "../../configs/managementSideBarConfig";
+import { CgGym } from "react-icons/cg";
 
 const ManagementSideBar: React.FC = () => {
   const [isMaximized, setIsMaximized] = useState(false);
   const [fixedAtMaximun, setFixedAtMaximum] = useState(false);
   const [processedMenuItems, setProcessedMenuItems] = useState<
-    { label: string; route: string; minimisedLabel: string; policy?: string }[]
+    { label: string; route: string; icon: string; policy?: string }[]
   >([]);
 
   useEffect(() => {
-    const letterCount: { [key: string]: number } = {};
-    const processed = managementSideBarConfig.map((item) => {
-      const firstLetter = item.label[0];
-
-      if (letterCount[firstLetter]) {
-        letterCount[firstLetter] += 1;
-        return {
-          ...item,
-          minimisedLabel: item.label.slice(0, 2),
-        };
-      } else {
-        letterCount[firstLetter] = 1;
-        return {
-          ...item,
-          minimisedLabel: firstLetter,
-        };
-      }
-    });
-
-    setProcessedMenuItems(
-      processed.filter(
-        (item) => item.policy && authorizationservice.authorise(item.policy)
-      )
+    const filteredItems = managementSideBarConfig.filter(
+      (item) => item.policy && authorizationservice.authorise(item.policy)
     );
-  }, [managementSideBarConfig]);
+    setProcessedMenuItems(filteredItems);
+  }, []);
 
   const toggleMaximization = () => {
     if (!fixedAtMaximun) {
@@ -61,25 +43,33 @@ const ManagementSideBar: React.FC = () => {
         onMouseEnter={toggleMaximization}
         onMouseLeave={() => !fixedAtMaximun && setIsMaximized(false)}
       >
-        <button className="toggle-button" onClick={handlePermanentMaximization}>
-          {fixedAtMaximun ? "<" : ">"}
-        </button>
+        {(isMaximized || fixedAtMaximun) && (
+          <button
+            className="toggle-button"
+            onClick={handlePermanentMaximization}
+          >
+            {fixedAtMaximun ? "<" : ">"}
+          </button>
+        )}
 
-        <>
-          <div className="sidebar-title-wrapper">
-            {isMaximized || fixedAtMaximun ? (
-              <h1 className="sidebar-title">Management Dashboard</h1>
-            ) : (
-              <></>
-            )}
-          </div>
-          <nav>
-            <div
-              className={`sidebar-menu ${
-                isMaximized || fixedAtMaximun ? "maximized" : "minimized"
-              }`}
-            >
-              {processedMenuItems.map((item) => (
+        <div className="sidebar-title-wrapper">
+          {isMaximized || fixedAtMaximun ? (
+            <h1 className="sidebar-title">Management Dashboard</h1>
+          ) : (
+            <div className="logo-wrapper flex-row">
+            <CgGym size={30} />
+            </div>
+          )}
+        </div>
+        <nav>
+          <div
+            className={`sidebar-menu ${
+              isMaximized || fixedAtMaximun ? "maximized" : "minimized"
+            }`}
+          >
+            {processedMenuItems.map((item) => {
+              const IconComponent = Icons[item.icon as keyof typeof Icons];
+              return (
                 <Link
                   to={item.route}
                   className={`menu-item ${
@@ -87,14 +77,15 @@ const ManagementSideBar: React.FC = () => {
                   }`}
                   key={item.label}
                 >
-                  {isMaximized || fixedAtMaximun
-                    ? item.label
-                    : item.minimisedLabel}
+                  {!(isMaximized || fixedAtMaximun) && IconComponent && (
+                    <IconComponent className="menu-icon" />
+                  )}
+                  {isMaximized || fixedAtMaximun ? item.label : null}
                 </Link>
-              ))}
-            </div>
-          </nav>
-        </>
+              );
+            })}
+          </div>
+        </nav>
       </div>
     </>
   );

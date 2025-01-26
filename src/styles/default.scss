@@ -1,0 +1,22 @@
+html,
+body, #root {
+  margin: 0;
+  padding: 0;
+  overflow-y: overlay; // Makes scrollbar overlay content (Chromium-based browsers)
+  scrollbar-width: thin; // For Firefox: makes scrollbar thinner
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent; // Firefox custom scrollbar colors
+
+  &::-webkit-scrollbar {
+    width: 8px; // Set a smaller width for the scrollbar
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  background-color: white;
+}

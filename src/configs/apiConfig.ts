@@ -5,4 +5,11 @@ export const apiEndpoints = {
   verifyOtp: "/auth/verify-otp",
   verifyAccessToken: "/auth/verify-access-token",
   verifyRefreshToken: "/auth/verify-refresh-token",
+  fetchManagementUserList: "/user-actions/users-by-roles",
+  fetchAllRoles: "/role-actions/roles",
+  createUser: "/user-actions/users",
+  updateUser: "/user-actions/users",
+  logout: "/auth/logout",
+  deleteUserWithId:"/user-actions/users",
+  getProductList:"",
 };

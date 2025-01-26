@@ -1,5 +1,10 @@
 .management-dashboard {
   display: flex;
+  background-color: #d9d9d9;
+  overflow-x: hidden;
+  .content-header-wrapper {
+    width: 100%;
+  }
   .content-area {
     flex-grow: 1;
     padding: 1rem;

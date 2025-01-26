@@ -1,0 +1,73 @@
+/* ImageSlider.css */
+.slider-container {
+    width: 100%;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 1.25rem 0; /* 20px to rem */
+    position: relative;
+  }
+  
+  .slider {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .slide {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .slide-image {
+    width: 100%;
+    height: 30rem;
+    object-fit: cover;
+    border-radius: 0.625rem; /* 10px to rem */
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem; /* 32px to rem */
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 0.625rem; /* 10px to rem */
+    cursor: pointer;
+    z-index: 2;
+  }
+  
+  .prev {
+    left: 0.625rem; 
+  }
+  
+  .next {
+    right: 0.625rem;
+  }
+  
+  .dots-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.625rem;
+  }
+  
+  .dot {
+    width: 5px; 
+    height: 15px;
+    border-radius: 100%;
+    background-color: white;
+    border: 0.125rem solid #ce202f;
+    margin: 0 0.3125rem; 
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .dot.active {
+    background-color: #ce202f;
+  }
+  

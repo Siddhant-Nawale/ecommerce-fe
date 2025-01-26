@@ -1,17 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { onCLS, onINP, onLCP } from 'web-vitals';
-import App from './App';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { onCLS, onINP, onLCP } from "web-vitals";
+import App from "./App";
+import "./index.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-const container = document.getElementById('root');
+const container = document.getElementById("root");
 if (!container) {
-  throw new Error("Root element not found. Make sure you have a <div id='root'></div> in your HTML.");
+  throw new Error(
+    "Root element not found. Make sure you have a <div id='root'></div> in your HTML."
+  );
 }
 
 const root = ReactDOM.createRoot(container);
 root.render(
+  <React.StrictMode>
     <App />
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
@@ -26,7 +32,7 @@ function sendToAnalytics(metric: any) {
   //   } else {
   //   fetch(url, { body, method: 'POST', keepalive: true });
   //   }
-  console.log(metric)
+  console.log(metric);
 }
 onCLS(sendToAnalytics);
 onINP(sendToAnalytics);

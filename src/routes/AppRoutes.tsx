@@ -11,13 +11,13 @@ const AppRoutes: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<DashboardWrapper />} />
-      {!user && (
+      {/* {!user && (
         <>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
       </>
-      )}
-      <Route path="/*" element={<ProtectedRoutes />} />
+      )} */}
+      <Route path="*" element={<ProtectedRoutes />} />
     </Routes>
   );
 };

@@ -6,20 +6,16 @@ enum LoginWithType {
   OTP = "OTP",
   PASSWORD = "Password",
 }
-
-const Login: React.FC = () => {
+interface LoginProps {
+  onLogin: () => void; // Specify the type for the onLogin prop
+}
+const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [loginWith, setLoginWith] = useState<LoginWithType>(LoginWithType.OTP);
 
   return (
     <div className="login-page flex-col">
-      <div className="img-wrapper">
-        <img
-          src="https://thumbs.dreamstime.com/b/diet-healthy-food-lifestyle-health-concept-sport-exercise-equipment-workout-and-gym-background-nutrition-detox-salad-f-179855057.jpg"
-          alt="Background"
-        />
-      </div>
       <LoginTypeSelector selectedType={loginWith} onSelect={setLoginWith} />
-      <LoginForm loginWith={loginWith} />
+      <LoginForm loginWith={loginWith} onLogin={onLogin} />
     </div>
   );
 };

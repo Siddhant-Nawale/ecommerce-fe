@@ -1,4 +1,4 @@
-$sidebar-min-width: 3.5rem;
+$sidebar-min-width: 3rem;
 $sidebar-max-width: 11rem;
 $sidebar-padding: 1.25rem;
 $sidebar-transition-duration: 0.3s;
@@ -12,7 +12,7 @@ $sidebar-transition-duration: 0.3s;
 
 .management-sidebar-placeholder {
   width: $sidebar-min-width;
-  height: 100vh;
+  height: 97vh;
   position: relative;
   padding: 0.625rem 0.3125rem;
   &.maximized {
@@ -26,7 +26,7 @@ $sidebar-transition-duration: 0.3s;
   color: $sidebar-text-color;
   width: $sidebar-min-width;
   z-index: 99999;
-  height: 100vh;
+  height: 97vh;
   padding: 0.625rem 0.3125rem;
   display: flex;
   flex-direction: column;
@@ -44,6 +44,7 @@ $sidebar-transition-duration: 0.3s;
     padding: $sidebar-padding;
   }
   .sidebar-title-wrapper {
+    width: 100%;
     min-height: 3.4rem;
     margin-bottom: 1rem;
   }
@@ -91,12 +92,13 @@ $sidebar-transition-duration: 0.3s;
       }
 
       &.minimized {
-        padding-left: 0.5rem;
-        font-size: 0.875rem;
+        font-size: 1rem;
+        font-weight: 500;
       }
       a {
         text-decoration: none;
         color: inherit;
+        text-align: center;
       }
     }
   }
@@ -120,5 +122,27 @@ $sidebar-transition-duration: 0.3s;
 
   &:hover {
     width: $sidebar-max-width;
+  }
+  .menu-icon {
+    font-size: 24px;
+    margin-right: 8px;
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    padding: 10px;
+  }
+
+  .menu-item.minimized .menu-icon {
+    margin-right: 0;
+  }
+
+  .logo-wrapper{
+    width: 100%;
+    justify-content: center;
   }
 }

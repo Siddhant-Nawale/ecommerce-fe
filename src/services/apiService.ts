@@ -1,5 +1,8 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosError } from "axios";
 import { apiEndpoints } from "../configs/apiConfig";
+import { groupProductsByTags } from "../apiMockData/productList";
+import { TagListObject } from "../models/Product";
+
 
 class ApiService {
   private static instance: ApiService;
@@ -64,6 +67,39 @@ class ApiService {
   }
   public async verifyRefreshToken(): Promise<any> {
     return this.axiosInstance.get(apiEndpoints.verifyRefreshToken);
+  }
+  public async fetchManagementUserList(roleNames: string[]): Promise<any> {
+    return this.axiosInstance.get(apiEndpoints.fetchManagementUserList, {
+      params: { roleNames: roleNames.join(",") },
+    });
+  }
+  public async fetchAllRoles(): Promise<any> {
+    return this.axiosInstance.get(apiEndpoints.fetchAllRoles);
+  }
+  public async createUser(userData: any): Promise<any> {
+    return this.axiosInstance.post(apiEndpoints.createUser, userData);
+  }
+  public async updateUser(userId: string, userData: any): Promise<any> {
+    return this.axiosInstance.put(
+      apiEndpoints.updateUser + `/${userId}`,
+      userData
+    );
+  }
+  public async logout(): Promise<any> {
+    return this.axiosInstance.get(apiEndpoints.logout);
+  }
+  public async deleteUserWithId(userId: string): Promise<any> {
+    return this.axiosInstance.delete(
+      apiEndpoints.deleteUserWithId + `/${userId}`
+    );
+  }
+  
+  public async getProductList(tagLists: TagListObject[]): Promise<any> {
+    // return this.axiosInstance.post(apiEndpoints.getProductList,{tagLists});
+
+    return new Promise((resolve) => {
+      resolve(groupProductsByTags(tagLists));
+    });
   }
 }
 

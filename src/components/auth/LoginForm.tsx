@@ -4,12 +4,14 @@ import { LoginWithType } from "./LoginTypeSelector";
 import ApiService from "../../services/apiService";
 import { useUser } from "../../contexts/UserContext";
 import authorizationservice from "../../services/authorizationservice";
+import { wait } from "../../utils/common.utils";
 
 interface LoginFormProps {
   loginWith: LoginWithType;
+  onLogin: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ loginWith }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ loginWith, onLogin }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [otp, setOtp] = useState(""); // State for OTP
@@ -36,6 +38,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ loginWith }) => {
             setUser(user);
             authorizationservice.initialiseAuthorization(user);
             navigate("/");
+            onLogin();
           }
         } catch (error) {
           setOtpSentError("Invalid OTP. Please try again.");
@@ -58,6 +61,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ loginWith }) => {
       user = loginResponse?.data?.user;
       if (user) {
         setUser(user);
+        authorizationservice.initialiseAuthorization(user);
+        onLogin();
         navigate("/");
       }
     }
@@ -99,7 +104,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ loginWith }) => {
                   required
                 />
                 <button type="submit">Submit OTP</button>
-                <button type="button" className="resend-otp-button" onClick={handleSendOtp}>
+                <button
+                  type="button"
+                  className="resend-otp-button"
+                  onClick={handleSendOtp}
+                >
                   Resend OTP
                 </button>
               </>
