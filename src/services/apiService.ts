@@ -93,6 +93,11 @@ class ApiService {
       apiEndpoints.deleteUserWithId + `/${userId}`
     );
   }
+  public async getTemplateWithId(templateId: string): Promise<any> {
+    return this.axiosInstance.get(
+      apiEndpoints.getTemplateWithId + `/${templateId}` 
+    );
+  }
   
   public async getProductList(tagLists: TagListObject[]): Promise<any> {
     // return this.axiosInstance.post(apiEndpoints.getProductList,{tagLists});

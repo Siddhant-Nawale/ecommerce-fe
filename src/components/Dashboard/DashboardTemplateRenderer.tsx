@@ -18,7 +18,7 @@ type Props = {
 const DashboardTemplateRenderer: React.FC<Props> = ({ template }) => {
   return (
     <div className="flex-col flex-center dashboard-template-renderer">
-      {template.map((templateItem, index) => {
+      {template?.map((templateItem, index) => {
         const Component = templateKeyComponentMap[templateItem.type];
 
         if (Component) {

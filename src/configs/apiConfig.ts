@@ -12,4 +12,5 @@ export const apiEndpoints = {
   logout: "/auth/logout",
   deleteUserWithId:"/user-actions/users",
   getProductList:"",
+  getTemplateWithId:"/template",
 };
