@@ -32,7 +32,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ loginWith, onLogin }) => {
             phone: phoneNumber,
             otp,
           });
-          await ApiService.loginWithOTP({ phone: phoneNumber });
           user = loginResponse?.data?.user;
           if (user) {
             setUser(user);
@@ -86,7 +85,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ loginWith, onLogin }) => {
       {loginWith === LoginWithType.OTP ? (
         <>
           <h3>{isOtpSent ? "Enter OTP" : "Login with OTP"}</h3>
-          <form onSubmit={handleSubmit}>
+          <form >
             <input
               type="text"
               placeholder="Enter your phone number"
@@ -103,7 +102,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ loginWith, onLogin }) => {
                   onChange={(e) => setOtp(e.target.value)}
                   required
                 />
-                <button type="submit">Submit OTP</button>
+                <button type="submit" onClick={handleSubmit}>Submit OTP</button>
                 <button
                   type="button"
                   className="resend-otp-button"
@@ -113,7 +112,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ loginWith, onLogin }) => {
                 </button>
               </>
             ) : (
-              <button type="submit">Send OTP</button>
+              <button type="submit" onClick={handleSubmit}>Send OTP</button>
             )}
           </form>
           {otpSentError && <div className="error">{otpSentError}</div>}

@@ -1,7 +1,7 @@
 import React from "react";
-import { Product } from "../../models/Product";
 import { MdOutlineTimer } from "react-icons/md";
-import { cssFilter } from "../../utils/common.utils";
+import { Product } from "../models/Product";
+import { cssFilter } from "../utils/common.utils";
 
 type ProductCardProps = {
   product: Product;
@@ -16,6 +16,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     product.price,
     product.discount
   );
+
+  if(!product){
+    return(<></>)
+  }
 
   return (
     <div className="product-card">
@@ -32,28 +36,28 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         {/* Weight */}
         <div className="weight-quantity-container flex-row grey-color">
-          {product.weight && (
+          {product?.weight && (
             <div>
-              Net: <span>{product.weight}</span>
+              Net: <span>{product?.weight}</span>
             </div>
           )}
-          {product.quantityInStock && (
-            <span>{product.quantityInStock} pcs</span>
+          {product?.quantityInStock && (
+            <span>{product?.quantityInStock} pcs</span>
           )}
         </div>
 
         <div className="price">
           <span
             className={cssFilter({
-              "strike-through grey-color": !!product.discount,
+              "strike-through grey-color": product && !!product.discount,
             })}
           >
-            &#8377;{product.price.toFixed(2)}
+            &#8377;{product?.price?.toFixed(2)}
           </span>
         </div>
-        {product.discount > 0 && (
+        {product?.discount > 0 && (
           <div className="discounted-price">
-            <span>&#8377;{discountedPrice.toFixed(2)}</span>
+            <span>&#8377;{discountedPrice?.toFixed(2)}</span>
           </div>
         )}
 

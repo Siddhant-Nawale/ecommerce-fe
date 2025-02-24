@@ -5,9 +5,9 @@ export type Product = {
   quantityInStock: number;
   category: string;
   image: string;
-  price:number;
-  discount:number;
-  weight:string;
+  price: number;
+  discount: number;
+  weight: string;
   tags: string[];
   otherInformation: {
     releaseDate: string;
@@ -22,7 +22,7 @@ export type Product = {
 // Define the structure for product list template
 export type ProductListTemplate = {
   type: string;
-  [key:string]: any;
+  [key: string]: any;
 }[];
 
 export type ProductList = {
@@ -32,11 +32,9 @@ export type ProductList = {
 // The new export type for input parameter
 export type TagListObject = {
   tagList: string[];
-  pagination: object; // Pagination structure is empty for now
+  config: { pagination: object, allTagsMatch: boolean }; // Pagination structure is empty for now
 };
 
 export type GroupedProducts = {
   [key: string]: Product[];
 };
-
-

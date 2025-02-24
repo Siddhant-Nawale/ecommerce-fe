@@ -3,7 +3,6 @@ import { apiEndpoints } from "../configs/apiConfig";
 import { groupProductsByTags } from "../apiMockData/productList";
 import { TagListObject } from "../models/Product";
 
-
 class ApiService {
   private static instance: ApiService;
   private axiosInstance: AxiosInstance;
@@ -95,17 +94,85 @@ class ApiService {
   }
   public async getTemplateWithId(templateId: string): Promise<any> {
     return this.axiosInstance.get(
-      apiEndpoints.getTemplateWithId + `/${templateId}` 
+      apiEndpoints.getTemplateWithId + `/${templateId}`
     );
   }
-  
-  public async getProductList(tagLists: TagListObject[]): Promise<any> {
-    // return this.axiosInstance.post(apiEndpoints.getProductList,{tagLists});
 
-    return new Promise((resolve) => {
-      resolve(groupProductsByTags(tagLists));
+  public async getProductList(tagListsObject: TagListObject): Promise<any> {
+    return this.axiosInstance.post(apiEndpoints.getProductList, {
+      ...tagListsObject,
     });
   }
+
+  public async getActiveTemplateByType(type: string): Promise<any> {
+    return this.axiosInstance.get(
+      apiEndpoints.getActiveTemplateByType + `/${type}`
+    );
+  }
+
+  public async getAllTemplates(): Promise<any> {
+    return this.axiosInstance.get(apiEndpoints.getAllTemplates);
+  }
+
+  public async updateTemplate(payload: any, templateId: string): Promise<any> {
+    return this.axiosInstance.put(
+      apiEndpoints.updateTemplate + "/" + templateId,
+      payload
+    );
+  }
+
+  public async getUniqueProductTags(): Promise<any> {
+    return this.axiosInstance.get(apiEndpoints.getUniqueProductTags);
+  }
+
+  public async uploadFileToS3(
+    file: File,
+    documentType: string
+  ): Promise<string | null> {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("documentType", documentType);
+
+      return this.axiosInstance.post(apiEndpoints.uploadFileToS3, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      return null;
+    }
+  }
+
+  getS3SignedUrl = async (
+    documentType: string,
+    fileName: string
+  ): Promise<string | null> => {
+    try {
+      return this.axiosInstance.post(apiEndpoints.getS3Url, {
+        documentType,
+        fileName,
+      });
+    } catch (error) {
+      console.error("Error getting signed URL:", error);
+      return null;
+    }
+  };
+
+  activateTemplate = async (
+    id: string,
+    type: string
+  ): Promise<string | null> => {
+    try {
+      return this.axiosInstance.put(
+        apiEndpoints.activateTemplate.replace(":id", id).replace(":type", type)
+      );
+    } catch (error) {
+      console.error("Error getting signed URL:", error);
+      return null;
+    }
+  };
 }
 
 // Export the singleton instance

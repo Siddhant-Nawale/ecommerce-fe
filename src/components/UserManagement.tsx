@@ -145,34 +145,45 @@ const UserManagement: React.FC = () => {
         <div className="table-container">
           <table {...getTableProps()} className="user-table">
             <thead>
-              {headerGroups.map((headerGroup) => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column) => (
-                    <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-                  ))}
-                </tr>
-              ))}
+              {headerGroups.map((headerGroup) => {
+                const { key: headerKey, ...restHeaderProps } =
+                  headerGroup.getHeaderGroupProps(); // Extract key
+
+                return (
+                  <tr key={headerKey} {...restHeaderProps}>
+                    {headerGroup.headers.map((column) => {
+                      const { key, ...rest } = column.getHeaderProps(); // Extract key
+                      return (
+                        <th key={key} {...rest}>
+                          {column.render("Header")}
+                        </th>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
             </thead>
             <tbody {...getTableBodyProps()}>
-              {rows.length > 0 ? (
-                rows.map((row) => {
-                  prepareRow(row);
-                  return (
-                    <tr {...row.getRowProps()}>
-                      {row.cells.map((cell) => (
-                        <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                      ))}
-                    </tr>
-                  );
-                })
-              ) : (
-                <tr className="no-data">
-                  <td colSpan={columns.length}>No Data Found</td>
-                </tr>
-              )}
+              {rows.map((row) => {
+                prepareRow(row);
+                const { key, ...rowProps } = row.getRowProps(); // Extract key separately
+                return (
+                  <tr key={key} {...rowProps}>
+                    {row.cells.map((cell) => {
+                      const { key: cellKey, ...cellProps } =
+                        cell.getCellProps(); // Extract key separately for cells
+                      return (
+                        <td key={cellKey} {...cellProps}>
+                          {cell.render("Cell")}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
-          
+
           {/* Pagination Controls
           {userList.length > 0 && (
             <div className="pagination-controls">

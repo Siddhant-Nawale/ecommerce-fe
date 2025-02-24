@@ -17,3 +17,7 @@
 @use "./default.scss";
 @use "./components/imageSlider.scss";
 @use "./components/basicComponents.scss";
+@use "./components/templateManagementComponent.scss";
+@use "./components/templateEditor.scss";
+@use "./partials/slider";
+@use "./components/inputWithOptions.scss";
