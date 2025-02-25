@@ -2,6 +2,7 @@ import axios, { AxiosInstance, AxiosResponse, AxiosError } from "axios";
 import { apiEndpoints } from "../configs/apiConfig";
 import { groupProductsByTags } from "../apiMockData/productList";
 import { TagListObject } from "../models/Product";
+import ToastService from "./toastService";
 
 class ApiService {
   private static instance: ApiService;
@@ -19,8 +20,12 @@ class ApiService {
 
     // Add an interceptor for handling errors
     this.axiosInstance.interceptors.response.use(
-      (response: AxiosResponse) => response,
+      (response: AxiosResponse) => {
+         ToastService.success(response?.data?.message);
+         return response
+      },
       (error: AxiosError<any>) => {
+        ToastService.error(error.response?.data?.message);
         // // Handle exceptions gracefully
         // const errorResponse = {
         //   success: false,
