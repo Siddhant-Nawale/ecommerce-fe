@@ -1,0 +1,56 @@
+.editor-field {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  .name-input {
+    padding: 0.5rem;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+  }
+
+  label {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .tags-container {
+    margin-top: 0.5rem;
+
+    .tags-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .tag-block {
+      display: flex;
+      align-items: center;
+      background-color: #f1f1f1;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.875rem;
+      color: #333;
+      gap: 0.5rem;
+
+      .delete-tag-btn {
+        background: none;
+        border: none;
+        color: #ce202f;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+    }
+
+    .add-tag input {
+      padding: 0.5rem;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+  }
+}
+

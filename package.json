@@ -1,5 +1,5 @@
 {
-  "name": "salman-ecommerce-fe",
+  "name": "ecommerce-fe",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,6 +19,7 @@
     "react-select": "^5.9.0",
     "react-slick": "^0.30.3",
     "react-table": "^7.8.0",
+    "react-toastify": "^11.0.5",
     "sass": "^1.83.4",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^4.2.4"

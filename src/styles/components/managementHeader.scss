@@ -1,15 +1,23 @@
 .management-header {
   display: flex;
-  justify-content: flex-end;
+  padding: 0 1rem;
+  justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
   background-color: #0059e0;
   height: 4.375rem;
+
+  .user-name{
+    font-size: 1.5rem;
+    color: #ffffff;
+    font-weight: 600;
+  }
 }
 
 .logout-button {
   background: none;
+  justify-self: end;
   border: none;
   cursor: pointer;
   color: #ffffff;

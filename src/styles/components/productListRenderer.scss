@@ -33,6 +33,7 @@
 }
 
 .product-list-container {
+  min-height: 20rem;
   width: 80rem;
   display: flex;
   align-items: center;
@@ -116,4 +117,11 @@
     background-color: #aaa;
     cursor: not-allowed;
   }
+}
+
+.no-products-message {
+  font-size: 1.2rem;
+  color: #666;
+  text-align: center;
+  margin-top: 1rem;
 }

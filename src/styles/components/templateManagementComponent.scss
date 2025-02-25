@@ -1,0 +1,182 @@
+/* General layout styles */
+.editor-container {
+  padding: 1.25rem;
+  max-width: 75rem;
+  margin: 0 auto;
+}
+
+/* Header Styles */
+.editor-header {
+  margin-bottom: 1.25rem;
+
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+  }
+
+  button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 0.3125rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #45a049;
+    }
+  }
+
+  select {
+    padding: 0.375rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.3125rem;
+    font-size: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+/* Table container with scrollable behavior */
+.table-container {
+  position: relative;
+  max-height: 28.125rem;
+  overflow-y: auto;
+  margin-top: 1rem;
+}
+
+/* Styling the table */
+.template-management-table {
+  border-collapse: collapse;
+  box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  border-bottom-left-radius: 0rem;
+  border-bottom-right-radius: 0rem;
+  background-color: #fff;
+  width: auto;
+  table-layout: auto;
+  min-width: 100%;
+}
+
+.template-management-table th,
+.template-management-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border: 0.0625rem solid #e0e0e0;
+  font-size: 0.875rem;
+}
+
+.template-management-table th {
+  background-color: #4caf50;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  font-weight: bold;
+}
+
+.template-management-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.template-management-table tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.template-management-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* 'No Data Found' style */
+.no-data {
+  text-align: center;
+  padding: 1.25rem;
+  font-style: italic;
+  color: #888;
+  font-size: 1rem;
+}
+
+/* Action button styles */
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 0.3125rem;
+  padding: 0.375rem 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+}
+
+/* Pagination controls (if needed) */
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.9375rem;
+  margin-top: 1rem;
+  padding: 0.625rem 1.25rem;
+  background-color: white;
+  border-radius: 0.5rem;
+}
+
+.pagination-controls button {
+  padding: 0.375rem 0.875rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 0.3125rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #45a049;
+  }
+
+  &:disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+  }
+}
+
+.pagination-controls span {
+  font-size: 0.875rem;
+  color: #555;
+}
+
+/* Button type wrapper */
+.button-type-blue-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.action-buttons {
+  gap: 0.2rem;
+}
+
+/* Custom scrollbar styling for Webkit-based browsers */
+.table-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background-color: #4caf50;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background-color: #45a049;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  border-radius: 4px;
+}

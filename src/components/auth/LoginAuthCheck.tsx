@@ -18,14 +18,14 @@ const LoginAuthCheck: React.FC<Props> = ({ children }) => {
     }
 
     try {
-      const { data: accessTokenData } = await apiService.verifyAccessToken();
+      const accessTokenData = (await apiService.verifyAccessToken())?.data;
       if (accessTokenData?.user) {
         setUser(accessTokenData.user);
         authorizationservice.initialiseAuthorization(accessTokenData.user);
         return;
       }
 
-      const { data: refreshTokenData } = await apiService.verifyRefreshToken();
+      const refreshTokenData = (await apiService.verifyRefreshToken())?.data;
       if (refreshTokenData?.user) {
         setUser(refreshTokenData.user);
         authorizationservice.initialiseAuthorization(refreshTokenData.user);

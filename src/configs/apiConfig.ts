@@ -10,6 +10,14 @@ export const apiEndpoints = {
   createUser: "/user-actions/users",
   updateUser: "/user-actions/users",
   logout: "/auth/logout",
-  deleteUserWithId:"/user-actions/users",
-  getProductList:"",
+  deleteUserWithId: "/user-actions/users",
+  getProductList: "/product/group-by-tags",
+  getTemplateWithId: "/template",
+  getActiveTemplateByType: "/templates/active",
+  getAllTemplates: "/template",
+  updateTemplate: "/template",
+  getUniqueProductTags: "/products/tags",
+  uploadFileToS3: "/upload",
+  getS3Url: "/get-signed-url",
+  activateTemplate: "/templates/:id/:type/active"
 };

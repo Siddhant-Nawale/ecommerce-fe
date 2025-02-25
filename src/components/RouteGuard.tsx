@@ -12,8 +12,7 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
 
   useEffect(() => {
     if (!user) {
-      // If the user is not logged in, redirect to the login page
-      navigate('/login');
+      navigate('/');
     }
   }, [user, navigate]);
 

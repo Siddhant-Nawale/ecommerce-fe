@@ -16,7 +16,7 @@ $sidebar-transition-duration: 0.3s;
   position: relative;
   padding: 0.625rem 0.3125rem;
   &.maximized {
-    width: $sidebar-max-width;
+    width: 12.5rem;
     padding: $sidebar-padding;
   }
 }
@@ -60,7 +60,7 @@ $sidebar-transition-duration: 0.3s;
     width: 100%;
     display: flex;
     flex-direction: column;
-    &.maximized {
+    &.sidebar-menu-maximized {
       width: $sidebar-max-width;
     }
 
@@ -87,11 +87,11 @@ $sidebar-transition-duration: 0.3s;
         background-color: transparent;
       }
 
-      &.maximized {
+      &.menu-item-maximized {
         padding-left: 1rem;
       }
 
-      &.minimized {
+      &.menu-item-minimized {
         font-size: 1rem;
         font-weight: 500;
       }
@@ -137,11 +137,11 @@ $sidebar-transition-duration: 0.3s;
     padding: 10px;
   }
 
-  .menu-item.minimized .menu-icon {
+  .menu-item.sidebar-menu-minimized .menu-icon {
     margin-right: 0;
   }
 
-  .logo-wrapper{
+  .logo-wrapper {
     width: 100%;
     justify-content: center;
   }

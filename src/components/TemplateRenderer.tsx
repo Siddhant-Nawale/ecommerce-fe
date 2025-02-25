@@ -1,6 +1,6 @@
 import React from "react";
+import { ProductListTemplate } from "../models/Product";
 import ProductListRenderer from "./ProductListRenderer";
-import { ProductListTemplate } from "../../models/Product";
 import ImageSlider from "./ImageSlider";
 import { SingleImage } from "./BasicComponents";
 
@@ -15,10 +15,10 @@ type Props = {
   template: ProductListTemplate;
 };
 
-const DashboardTemplateRenderer: React.FC<Props> = ({ template }) => {
+const TemplateRenderer: React.FC<Props> = ({ template }) => {
   return (
     <div className="flex-col flex-center dashboard-template-renderer">
-      {template.map((templateItem, index) => {
+      {template?.map((templateItem, index) => {
         const Component = templateKeyComponentMap[templateItem.type];
 
         if (Component) {
@@ -32,4 +32,4 @@ const DashboardTemplateRenderer: React.FC<Props> = ({ template }) => {
   );
 };
 
-export default DashboardTemplateRenderer;
+export default TemplateRenderer;
