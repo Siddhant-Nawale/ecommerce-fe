@@ -21,8 +21,8 @@ class ApiService {
     // Add an interceptor for handling errors
     this.axiosInstance.interceptors.response.use(
       (response: AxiosResponse) => {
-         ToastService.success(response?.data?.message);
-         return response
+        ToastService.success(response?.data?.message);
+        return response;
       },
       (error: AxiosError<any>) => {
         ToastService.error(error.response?.data?.message);
