@@ -63,7 +63,7 @@ const ProductListRenderer: React.FC<Props> = ({
 
   const displayedProducts = verticalView
     ? products
-    : products.slice(currentIndex, currentIndex + CARDS_TO_SHOW);
+    : products?.slice(currentIndex, currentIndex + CARDS_TO_SHOW);
 
   return (
     <div

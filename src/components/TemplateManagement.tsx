@@ -10,7 +10,11 @@ type TemplateItem = {
   version: number;
   state: string;
   active: boolean;
-  template: Array<{ type: string; [key: string]: any }>;
+  template: {
+    type: string;
+    orientation?: string;
+    content: Array<{ type: string; [key: string]: any }>;
+  };
   createdAt: string;
   updatedAt: string;
 };
@@ -42,9 +46,7 @@ const TemplateManagement: React.FC = () => {
     (template) => template.type === selectedType
   );
 
-  const updateTemplate = (
-    updatedTemplate: Array<{ type: string; [key: string]: any }>
-  ) => {
+  const updateTemplate = (updatedTemplate: any) => {
     setTemplate((prevTemplate) =>
       prevTemplate
         ? { ...prevTemplate, template: updatedTemplate }
@@ -127,7 +129,7 @@ const TemplateManagement: React.FC = () => {
                 onUpdate={updateTemplate}
               />
             ) : (
-              <TemplateRenderer template={template?.template} />
+              <TemplateRenderer template={template.template} />
             )
           ) : (
             <div className="no-data">Select a template to edit</div>

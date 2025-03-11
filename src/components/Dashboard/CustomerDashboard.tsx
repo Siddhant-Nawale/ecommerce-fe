@@ -17,7 +17,7 @@ const CustomerDashboard: React.FC = () => {
     fetchTeplate();
   }, []);
   return (
-    <div className="dashboard">
+    <div className="dashboard flex-col flex-center">
       {isMobile ? <CustomerHeaderMobile /> : <CustomerHeaderLaptop />}
       <div className="dashboard-content">
         <TemplateRenderer template={tempate?.template} />

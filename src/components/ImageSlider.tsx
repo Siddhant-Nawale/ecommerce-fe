@@ -16,12 +16,12 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
   onUpdate,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [newImageUrl, setNewImageUrl] = useState(urls[0] || ""); // Initialize with the first URL
+  const [newImageUrl, setNewImageUrl] = useState(urls?.[0] || ""); // Initialize with the first URL
   const intervalRef = useRef<NodeJS.Timeout | null>(null); // Reference for the interval
 
   // Automatically slide to the next slide
   useEffect(() => {
-    if (autoSlide) {
+    if (autoSlide && urls) {
       const startAutoSlide = () => {
         if (intervalRef.current) {
           clearInterval(intervalRef.current); // Clear any existing interval
@@ -39,7 +39,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
         }
       };
     }
-  }, [autoSlide, slideInterval, urls.length]);
+  }, [autoSlide, slideInterval, urls?.length]);
 
   const nextSlide = () => {
     const nextIndex = (currentIndex + 1) % urls.length;
@@ -104,7 +104,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
           &#10094;
         </button>
         <div className="slide">
-          {urls[currentIndex] ? (
+          {urls?.[currentIndex] ? (
             <img
               src={urls[currentIndex]}
               alt={`Slide ${currentIndex}`}
@@ -136,7 +136,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({
       )}
 
       <div className="dots-container">
-        {urls.map((_, index) => (
+        {urls?.map((_, index) => (
           <button
             key={index}
             className={`dot ${index === currentIndex ? "active" : ""}`}

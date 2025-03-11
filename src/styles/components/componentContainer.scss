@@ -1,0 +1,11 @@
+.component-container {
+  border-radius: 1rem;
+  
+  padding: 1rem;
+  &.edit-mode{
+    box-shadow: 0 5px 10px 1px grey;
+  }
+  .component-wrapper {
+    gap: 1.5rem;
+  }
+}
