@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 import ImageSlider from "./ImageSlider";
 import ProductListRenderer from "./ProductListRenderer";
-import { SingleImage } from "./BasicComponents";
+import { SingleImage } from "./common/BasicComponents";
 import apiService from "../services/apiService";
 import InputWithOptions from "./common/InputWithOptions";
+import { ImageViewerWithList } from "./common/ImageViewerWithList";
+import { ComponentContainer } from "./common/ComponentContainer";
 
 type TemplateItem = {
   type: string;
@@ -11,8 +13,8 @@ type TemplateItem = {
 };
 
 type Props = {
-  template: TemplateItem[];
-  onUpdate: (updatedTemplate: TemplateItem[]) => void;
+  template: TemplateItem;
+  onUpdate: (updatedTemplate: TemplateItem) => void;
 };
 
 const TemplateEditor: React.FC<Props> = ({ template, onUpdate }) => {
@@ -27,131 +29,117 @@ const TemplateEditor: React.FC<Props> = ({ template, onUpdate }) => {
     fetchProductTypes();
   }, [fetchProductTypes]);
 
-  const handleChange = (
-    index: number,
-    key: string,
-    value: string | string[] | boolean
-  ) => {
-    const updatedTemplate = [...template];
-    updatedTemplate[index] = { ...updatedTemplate[index], [key]: value };
-    onUpdate(updatedTemplate);
-  };
-
-  const handleUpdateUrls = (index: number, newUrls: string[]) => {
-    const updatedTemplate = [...template];
-    updatedTemplate[index] = { ...updatedTemplate[index], urls: newUrls };
-    onUpdate(updatedTemplate);
-  };
-
-  const handleAddTag = (index: number, tag: string) => {
-    if (!tag.trim()) return;
-
-    const updatedTemplate = [...template];
-    updatedTemplate[index].tagList = [...updatedTemplate[index].tagList, tag];
-    onUpdate(updatedTemplate);
-  };
-
-  const handleDeleteTag = (index: number, tag: string) => {
-    const updatedTemplate = [...template];
-    updatedTemplate[index].tagList = updatedTemplate[index].tagList.filter(
-      (t: string) => t !== tag
-    );
-    onUpdate(updatedTemplate);
-  };
-
-  const handleToggleTagsMatch = (index: number) => {
-    const updatedTemplate = [...template];
-    updatedTemplate[index].allTagsMatch = !updatedTemplate[index].allTagsMatch;
-    onUpdate(updatedTemplate);
+  const handleChange = (key: string, value: string | string[] | boolean) => {
+    onUpdate({ ...template, [key]: value });
   };
 
   return (
     <div className="editor-panel">
       <div className="editor-content">
-        {template.map((item, index) => (
-          <div key={index} className="editor-section">
-            {/* Image Slider */}
-            {item.type === "imageSlider" && (
-              <div className="editor-field">
-                <label>Image Slider</label>
-                <ImageSlider
-                  urls={item.urls}
-                  editMode={true}
-                  onUpdate={(newUrls) => handleUpdateUrls(index, newUrls)}
+        <div className="editor-section">
+          {/* Image Slider */}
+          {template.type === "imageSlider" && (
+            <div className="editor-field">
+              <label>Image Slider</label>
+              <ImageSlider
+                urls={template.urls}
+                editMode={true}
+                onUpdate={(newUrls) => handleChange("urls", newUrls)}
+              />
+            </div>
+          )}
+
+          {/* Image */}
+          {template.type === "image" && (
+            <div className="editor-field">
+              <label>Image URL</label>
+              <input
+                type="text"
+                className="name-input"
+                value={template.url}
+                onChange={(e) => handleChange("url", e.target.value)}
+              />
+              <div className="single-image-wrapper">
+                {template.url && <SingleImage url={template.url} alt="preview" />}
+              </div>
+            </div>
+          )}
+
+          {/* Product List */}
+          {template.type === "productList" && (
+            <div className="editor-field">
+              <label>List Name</label>
+              <input
+                type="text"
+                className="name-input"
+                value={template.listName}
+                onChange={(e) => handleChange("listName", e.target.value)}
+              />
+
+              <ProductListRenderer tagList={template.tagList} allTagsMatch={template.allTagsMatch} />
+
+              {/* Toggle for allTagsMatch */}
+              <div>
+                <p>Match All Tags</p>
+                <input
+                  className="slider"
+                  type="checkbox"
+                  checked={template.allTagsMatch}
+                  onChange={() => handleChange("allTagsMatch", !template.allTagsMatch)}
                 />
               </div>
-            )}
 
-            {/* Image */}
-            {item.type === "image" && (
-              <div className="editor-field">
-                <label>Image URL</label>
-                <input
-                  type="text"
-                  className="name-input"
-                  value={item.url}
-                  onChange={(e) => handleChange(index, "url", e.target.value)}
-                />
-                {item.url && <SingleImage url={item.url} alt="preview" />}
-              </div>
-            )}
-
-            {/* Product List */}
-            {item.type === "productList" && (
-              <div className="editor-field">
-                <label>List Name</label>
-                <input
-                  type="text"
-                  className="name-input"
-                  value={item.listName}
-                  onChange={(e) =>
-                    handleChange(index, "listName", e.target.value)
-                  }
-                />
-
-                <ProductListRenderer
-                  tagList={item.tagList}
-                  allTagsMatch={item.allTagsMatch}
-                />
-
-                {/* Toggle for allTagsMatch */}
-                <div className="tags-match-toggle">
-                  <p>Match All Tags</p>
-                  <input
-                    type="checkbox"
-                    checked={item.allTagsMatch}
-                    onChange={() => handleToggleTagsMatch(index)}
-                  />
+              {/* Tags Section */}
+              <div className="tags-container">
+                <div className="tags-list">
+                  {template.tagList?.map((tag: string, tagIndex: number) => (
+                    <div key={tagIndex} className="tag-block">
+                      <span>{tag}</span>
+                      <button
+                        type="button"
+                        className="delete-tag-btn"
+                        onClick={() => handleChange("tagList", template.tagList.filter((t: string) => t !== tag))}
+                      >
+                        ✖
+                      </button>
+                    </div>
+                  ))}
                 </div>
 
-                {/* Tags Section */}
-                <div className="tags-container">
-                  <div className="tags-list">
-                    {item.tagList?.map((tag: string, tagIndex: number) => (
-                      <div key={tagIndex} className="tag-block">
-                        <span>{tag}</span>
-                        <button
-                          type="button"
-                          className="delete-tag-btn"
-                          onClick={() => handleDeleteTag(index, tag)}
-                        >
-                          ✖
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Tag Input Component */}
-                  <InputWithOptions
-                    existingTags={item.tagList}
-                    availableTags={productTags}
-                    handleOnSelectEmmitor={(tag) => handleAddTag(index, tag)}
-                  />
+                {/* Tag Input Component */}
+                <div className="input-with-option-wrapper">
+                <InputWithOptions
+                  existingTags={template.tagList}
+                  availableTags={productTags}
+                  handleOnSelectEmmitor={(tag) => handleChange("tagList", [...template.tagList, tag])}
+                />
                 </div>
               </div>
-            )}
-          </div>
-        ))}
+            </div>
+          )}
+
+          {template.type === "imageViewerWithList" && (
+            <div>
+              <ImageViewerWithList
+                imageUrls={template.imageUrls}
+                selectedImageUrl={template.selectedImageUrl}
+                editMode={true}
+                onUpdate={(newUrls) => handleChange("imageUrls", newUrls)}
+              />
+            </div>
+          )}
+
+          {template.type === "componentContainer" && (
+            <div>
+              <ComponentContainer
+                orientation={template.orientation}
+                content={template.content}
+                onUpdate={(orientation, content) => onUpdate({ ...template, orientation, content })}
+                editMode={true}
+              />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

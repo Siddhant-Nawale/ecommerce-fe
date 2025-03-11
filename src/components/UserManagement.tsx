@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useTable, Column } from "react-table";
 import apiService from "../services/apiService";
 import authorizationservice from "../services/authorizationservice";
-import Loader from "./Loader";
+import Loader from "./common/Loader";
 import { userFetchAndPolicyConfig } from "../configs/userFetchAndPolicyConfig";
 import UserForm from "./UserForm";
 import { User } from "../contexts/UserContext";

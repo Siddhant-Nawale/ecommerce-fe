@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import apiService from "../services/apiService";
-import Loader from "./Loader";
+import Loader from "./common/Loader";
 
 interface Role {
   id: string;
