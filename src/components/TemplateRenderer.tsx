@@ -1,10 +1,9 @@
 import React from "react";
-import { ProductListTemplate } from "../models/Product";
-import ProductListRenderer from "./ProductListRenderer";
 import ImageSlider from "./ImageSlider";
+import ProductListRenderer from "./ProductListRenderer";
 import { SingleImage } from "./common/BasicComponents";
-import { ImageViewerWithList } from "./common/ImageViewerWithList";
 import ComponentContainer from "./common/ComponentContainer";
+import { ImageViewerWithList } from "./common/ImageViewerWithList";
 
 const templateKeyComponentMap: { [key: string]: React.ComponentType<any> } = {
   productList: ProductListRenderer,
@@ -30,7 +29,7 @@ const TemplateRenderer: React.FC<Props> = ({ template }) => {
   }
 
   return (
-    <div className="flex-col flex-center dashboard-template-renderer">
+    <div className="flex-col flex-align-center dashboard-template-renderer">
       <Component {...template} />
     </div>
   );
