@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
+import apiService from "../services/apiService";
 import ImageSlider from "./ImageSlider";
 import ProductListRenderer from "./ProductListRenderer";
 import { SingleImage } from "./common/BasicComponents";
-import apiService from "../services/apiService";
-import InputWithOptions from "./common/InputWithOptions";
-import { ImageViewerWithList } from "./common/ImageViewerWithList";
 import { ComponentContainer } from "./common/ComponentContainer";
+import { ImageViewerWithList } from "./common/ImageViewerWithList";
+import InputWithOptions from "./common/InputWithOptions";
 
 type TemplateItem = {
   type: string;
@@ -15,9 +15,14 @@ type TemplateItem = {
 type Props = {
   template: TemplateItem;
   onUpdate: (updatedTemplate: TemplateItem) => void;
+  deleteComponent?: React.ReactNode;
 };
 
-const TemplateEditor: React.FC<Props> = ({ template, onUpdate }) => {
+const TemplateEditor: React.FC<Props> = ({
+  template,
+  onUpdate,
+  deleteComponent,
+}) => {
   const [productTags, setProductTags] = useState<string[]>([]);
 
   const fetchProductTypes = useCallback(async () => {
@@ -35,6 +40,7 @@ const TemplateEditor: React.FC<Props> = ({ template, onUpdate }) => {
 
   return (
     <div className="editor-panel">
+      {deleteComponent}
       <div className="editor-content">
         <div className="editor-section">
           {/* Image Slider */}
@@ -60,7 +66,9 @@ const TemplateEditor: React.FC<Props> = ({ template, onUpdate }) => {
                 onChange={(e) => handleChange("url", e.target.value)}
               />
               <div className="single-image-wrapper">
-                {template.url && <SingleImage url={template.url} alt="preview" />}
+                {template.url && (
+                  <SingleImage url={template.url} alt="preview" />
+                )}
               </div>
             </div>
           )}
@@ -76,7 +84,10 @@ const TemplateEditor: React.FC<Props> = ({ template, onUpdate }) => {
                 onChange={(e) => handleChange("listName", e.target.value)}
               />
 
-              <ProductListRenderer tagList={template.tagList} allTagsMatch={template.allTagsMatch} />
+              <ProductListRenderer
+                tagList={template.tagList}
+                allTagsMatch={template.allTagsMatch}
+              />
 
               {/* Toggle for allTagsMatch */}
               <div>
@@ -85,7 +96,9 @@ const TemplateEditor: React.FC<Props> = ({ template, onUpdate }) => {
                   className="slider"
                   type="checkbox"
                   checked={template.allTagsMatch}
-                  onChange={() => handleChange("allTagsMatch", !template.allTagsMatch)}
+                  onChange={() =>
+                    handleChange("allTagsMatch", !template.allTagsMatch)
+                  }
                 />
               </div>
 
@@ -98,7 +111,12 @@ const TemplateEditor: React.FC<Props> = ({ template, onUpdate }) => {
                       <button
                         type="button"
                         className="delete-tag-btn"
-                        onClick={() => handleChange("tagList", template.tagList.filter((t: string) => t !== tag))}
+                        onClick={() =>
+                          handleChange(
+                            "tagList",
+                            template.tagList.filter((t: string) => t !== tag)
+                          )
+                        }
                       >
                         ✖
                       </button>
@@ -108,18 +126,21 @@ const TemplateEditor: React.FC<Props> = ({ template, onUpdate }) => {
 
                 {/* Tag Input Component */}
                 <div className="input-with-option-wrapper">
-                <InputWithOptions
-                  existingTags={template.tagList}
-                  availableTags={productTags}
-                  handleOnSelectEmmitor={(tag) => handleChange("tagList", [...template.tagList, tag])}
-                />
+                  <InputWithOptions
+                    existingTags={template.tagList}
+                    availableTags={productTags}
+                    handleOnSelectEmmitor={(tag) =>
+                      handleChange("tagList", [...template.tagList, tag])
+                    }
+                  />
                 </div>
               </div>
             </div>
           )}
 
           {template.type === "imageViewerWithList" && (
-            <div>
+            <div className="editor-field">
+              <label>Image Viewer With List</label>
               <ImageViewerWithList
                 imageUrls={template.imageUrls}
                 selectedImageUrl={template.selectedImageUrl}
@@ -134,7 +155,9 @@ const TemplateEditor: React.FC<Props> = ({ template, onUpdate }) => {
               <ComponentContainer
                 orientation={template.orientation}
                 content={template.content}
-                onUpdate={(orientation, content) => onUpdate({ ...template, orientation, content })}
+                onUpdate={(orientation, content) =>
+                  onUpdate({ ...template, orientation, content })
+                }
                 editMode={true}
               />
             </div>

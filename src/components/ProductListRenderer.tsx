@@ -73,7 +73,7 @@ const ProductListRenderer: React.FC<Props> = ({
     >
       <p className="title">{listName}</p>
       <div className="product-list-container">
-        {products.length === 0 && !isLoading ? (
+        {products?.length === 0 && !isLoading ? (
           <p className="no-products-message">No products to show</p>
         ) : (
           <>
@@ -95,7 +95,7 @@ const ProductListRenderer: React.FC<Props> = ({
               ))}
             </div>
             {!verticalView &&
-              (currentIndex + CARDS_TO_SHOW < products.length ? (
+              (currentIndex + CARDS_TO_SHOW < products?.length ? (
                 <div
                   className="scroll-arrow flex-row flex-center right"
                   onClick={handleScrollRight}
